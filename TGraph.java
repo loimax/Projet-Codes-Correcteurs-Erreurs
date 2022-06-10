@@ -75,14 +75,12 @@ public class TGraph {
         {
             for(j = 0; j < w_r + 1; j++)
             {
-		if(j == 0)
-                    System.out.print(left[i][j] + "| ");
-                else if (left[i][j] >= 10)
-                    System.out.print(left[i][j] + " ");
-                else
-                System.out.print(" " + left[i][j] + " ");
-
-                    
+		    if(j == 0)
+                System.out.print(left[i][j] + "| ");
+            else if (left[i][j] >= 10)
+                System.out.print(left[i][j] + " ");
+            else
+                System.out.print(" " + left[i][j] + " ");      
             }    
             System.out.println();
         }
