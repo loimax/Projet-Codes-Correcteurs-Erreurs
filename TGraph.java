@@ -51,9 +51,12 @@ public class TGraph {
         }
     }
 
-
-    public void display(){
+    // First implementation of display 
+    /*
+    public void display()
+    {
         System.out.println("Right display : ");
+        System.out.println();
         int i, j;
         for(i = 0 ; i < n_c; i++)
         {
@@ -71,6 +74,7 @@ public class TGraph {
         System.out.println();
         System.out.println();
         System.out.println("Left display : ");
+        System.out.println();
         for(i = 0 ; i < n_r; i++)
         {
             for(j = 0; j < w_r + 1; j++)
@@ -84,5 +88,47 @@ public class TGraph {
             }    
             System.out.println();
         }
+    }*/
+
+
+    public void display()
+    {
+        System.out.println("\nGraphe de Tanner :\n\nRight tab display :\t\tLeft tab Display :\n");
+        int i, j, k, l;
+        for(i = 0 , k = 0; i < n_c; i++, k++)
+        {
+            for(j = 0; j < w_c + 1; j++)
+            {
+                if(j == 0)
+                    System.out.print(right[i][j] + "| ");
+                else if (right[i][j] >= 10)
+                    System.out.print(right[i][j] + " ");
+                else
+                    System.out.print(" " + right[i][j] + " ");
+            }
+
+            System.out.print("\t\t\t");    
+            if (k < n_r)
+            {
+                for(l = 0; l < w_r + 1; l++)
+                {
+                if(l == 0)
+                    System.out.print(left[k][l] + "| ");
+                else if (left[k][l] >= 10)
+                    System.out.print(left[k][l] + " ");
+                else
+                    System.out.print(" " + left[k][l] + " ");      
+                }    
+            }
+            System.out.println();
+        }
+    }
+
+    public Matrix decode(Matrix code, int rounds){
+        Matrix r = new Matrix(code.getRows(),code.getCols());
+        Matrix decoded = new Matrix(code.getRows(),code.getCols());
+        decoded.display();
+        return r;
+        
     }
 }

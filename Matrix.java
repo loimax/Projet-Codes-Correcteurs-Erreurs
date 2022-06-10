@@ -196,7 +196,7 @@ public class Matrix {
     public Matrix genG(){
         Matrix a = new Matrix(data).sysTransform();
         Matrix b = new Matrix(a.data).transpose();
-        //G = (Ik P) où Ik est la matrice identité à k lignes et k colonnes et 
+        //G = (Ik|P) où Ik est la matrice identité à k lignes et k colonnes et 
         //P est la matrice de parité qui comporte k lignes et (n−k) colonnes avec n nombre colonnes de M.
         Matrix g = new Matrix(a.cols-a.rows,a.rows+(a.cols-a.rows));
         for (int i = 0; i < g.rows; i++)

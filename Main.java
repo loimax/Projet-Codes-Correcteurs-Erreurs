@@ -30,7 +30,7 @@ public class Main {
         // m.genG();
         
         Matrix hbase = loadMatrix("data/matrix-15-20-3-4", 15, 20);
-        hbase.display();
+        //hbase.display();
         
         // byte[][] mot = {{1,0,1,0,1}};
         // Matrix encode = new Matrix(mot).multiply(hbase.genG());
