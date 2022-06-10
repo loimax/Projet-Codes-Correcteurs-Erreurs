@@ -1,3 +1,5 @@
+import javax.lang.model.util.ElementScanner6;
+
 public class TGraph {
     int[][] left = null, right = null;
     private int n_r = 0, w_r = 0, n_c = 0, w_c = 0;
@@ -51,24 +53,36 @@ public class TGraph {
 
 
     public void display(){
-        System.out.println("Right display");
+        System.out.println("Right display : ");
         int i, j;
         for(i = 0 ; i < n_c; i++)
         {
             for(j = 0; j < w_c + 1; j++)
             {
-                System.out.print(right[i][j] + " ");
+                if(j == 0)
+                    System.out.print(right[i][j] + "| ");
+                    else if (right[i][j] >= 10)
+                        System.out.print(right[i][j] + " ");
+                        else
+                            System.out.print(" " + right[i][j] + " ");
             }    
             System.out.println();
         }
         System.out.println();
         System.out.println();
-        System.out.println("Left display");
+        System.out.println("Left display : ");
         for(i = 0 ; i < n_r; i++)
         {
             for(j = 0; j < w_r + 1; j++)
             {
-                System.out.print(left[i][j] + " ");
+		        if(j == 0)
+                    System.out.print(left[i][j] + "| ");
+                    else if (left[i][j] >= 10)
+                        System.out.print(left[i][j] + " ");
+                        else
+                            System.out.print(" " + left[i][j] + " ");
+
+                    
             }    
             System.out.println();
         }
