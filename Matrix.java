@@ -1,6 +1,3 @@
-import java.util.*;
-import java.io.*;
-
 public class Matrix {
     byte[][] data = null;
     private int rows = 0, cols = 0;

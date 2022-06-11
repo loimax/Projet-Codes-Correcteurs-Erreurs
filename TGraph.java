@@ -1,5 +1,3 @@
-import javax.lang.model.util.ElementScanner6;
-
 public class TGraph {
     int[][] left = null, right = null;
     private int n_r = 0, w_r = 0, n_c = 0, w_c = 0;
@@ -124,11 +122,66 @@ public class TGraph {
         }
     }
 
-    public Matrix decode(Matrix code, int rounds){
-        Matrix r = new Matrix(code.getRows(),code.getCols());
-        Matrix decoded = new Matrix(code.getRows(),code.getCols());
-        decoded.display();
-        return r;
-        
+    public Matrix decode(Matrix code, int rounds)
+    {
+        Matrix result = new Matrix(code.getRows(), code.getCols());
+        boolean flag_error;
+        int[] count=new int[this.n_c];
+
+        for(int i = 0; i < this.n_c; i++)
+        {
+            this.right[i][0] = code.getElem(0, i);
+        }
+
+        for(int lim=0; lim<rounds; lim++)
+        {
+            flag_error = false;
+            for(int i=0; i<this.n_r; i++)
+            {
+                //Initialisation noeud F
+                this.left[i][0] = 0;
+                //Calcul de la parité
+                for(int par=1; par<this.w_r+1; par++)
+                    this.left[i][0] += this.right[this.left[i][par]][0];
+                    this.left[i][0] %= 2;
+                
+                //Verifier s'il y a une erreur
+                if(this.left[i][0] != 0) flag_error = true;
+            }
+            //décodage si pas d'erreur
+            if(!flag_error)
+            {
+                for(int i=0; i < this.n_c; i ++)
+                    result.setElem(0, i, (byte)this.right[i][0]);
+                return result;
+            }
+            //Traitement des erreurs
+            //On re initialise count
+            for(int i=0; i<this.n_c; i++) 
+                count[i]=0;
+            //Comptage du maximum des erreurs
+            int max_error = 0;
+            for(int i=0; i<n_r ; i++)
+            {
+                if(this.left[i][0] != 0)
+                {
+                    for(int j=1; j<this.w_r+1; j++)
+                    {
+                        count[this.left[i][j]]++;
+                        max_error = Math.max(max_error, count[this.left[i][j]]);
+                    }
+                }
+            }
+            //On change les max des erreurs
+            for(int i=0; i<this.n_c; i++)
+            {
+                if(count[i] == max_error)
+                    this.right[i][0] = 1-this.right[i][0];
+            }
+        }
+        //On dépasse la limite d'itération on retourne un mot qui vaut -1
+        for(int i=0; i<this.n_c; i++) 
+            result.setElem(0, i, (byte) -1);
+        return result;
     }
 }
