@@ -29,119 +29,122 @@ public class Main {
         // m.genG();
         
         // Tâche 1 :
-        // Matrix hbase = loadMatrix("data/matrix-15-20-3-4", 15, 20);
+        System.out.println("\n-------------------------------------\n\t\tTâche 1\t\n-------------------------------------\n");
+        Matrix hbase = loadMatrix("data/matrix-15-20-3-4", 15, 20);
 
-        // System.out.println("Matrice de controle H :\n");
-        // hbase.display();
+        System.out.println("Matrice de controle H :\n");
+        hbase.display();
 
-        // System.out.println("Forme systématique de H :\n");
-        // hbase.sysTransform().display();
+        System.out.println("Forme systématique de H :\n");
+        hbase.sysTransform().display();
 
-        // System.out.println("Matrice génératrice G :\n");
-        // hbase.genG().display();
+        System.out.println("Matrice génératrice G :\n");
+        hbase.genG().display();
 
         
-        // // Tâche 2 :
-        // byte[][] u = {{1,0,1,0,1}};
-        // System.out.println("Mot binaire u :\n");
-        // for(int i = 0; i < 5; i++) System.out.print(u[0][i] + " ");
+        // Tâche 2 :
+        System.out.println("\n-------------------------------------\n\t\tTâche 2\t\n-------------------------------------\n");
+        byte[][] u = {{1,0,1,0,1}};
+        System.out.println("Mot binaire u :\n");
+        for(int i = 0; i < 5; i++) System.out.print(u[0][i] + " ");
 
-        // System.out.println("\n\nEncodage de u (x=u.G) :\n");
-        // Matrix x = new Matrix(u).multiply(hbase.genG());
-        // x.display();
+        System.out.println("\n\nEncodage de u (x=u.G) :\n");
+        Matrix x = new Matrix(u).multiply(hbase.genG());
+        x.display();
 
-        // System.out.println("Syndrome de x (s=H.x^t) :\n");
-        // hbase.multiply(x.transpose()).transpose().display();
+        System.out.println("Syndrome de x (s=H.x^t) :\n");
+        hbase.multiply(x.transpose()).transpose().display();
 
-        // TGraph T_graph = new TGraph(hbase, 3, 4);
-        // T_graph.display();
+        TGraph T_graph = new TGraph(hbase, 3, 4);
+        T_graph.display();
 
-        // System.out.println("\n-------------------------------------\n  Bruitage et correction du mot x :\n-------------------------------------\n");
+        System.out.println("\n-------------------------------------\n  Bruitage et correction du mot x :\n-------------------------------------\n");
         
-        // System.out.println("Mot de code x :");
-        // TGraph graph = new TGraph(hbase, 3, 4);
-        // graph.decode(x, 100).display();
+        System.out.println("Mot de code x :");
+        TGraph graph = new TGraph(hbase, 3, 4);
+        graph.decode(x, 100).display();
         
-        // //Vecteur d'erreur e1
-        // byte[][] e1 = {{0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-        // System.out.println("Vecteur d'erreurs e1 :\n");
-        // for(int i = 0; i < 20; i++) System.out.print(e1[0][i] + " ");
+        //Vecteur d'erreur e1
+        byte[][] e1 = {{0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+        System.out.println("Vecteur d'erreurs e1 :\n");
+        for(int i = 0; i < 20; i++) System.out.print(e1[0][i] + " ");
 
-        // System.out.println("\n\nMot de code bruité y1=x+e1 :\n");
-        // Matrix y1 = new Matrix(e1).add(x);
-        // y1.display();
+        System.out.println("\n\nMot de code bruité y1=x+e1 :\n");
+        Matrix y1 = new Matrix(e1).add(x);
+        y1.display();
 
-        // System.out.println("Syndrome de y1 :\n");
-        // hbase.multiply(y1.transpose()).transpose().display();
+        System.out.println("Syndrome de y1 :\n");
+        hbase.multiply(y1.transpose()).transpose().display();
         
-        // System.out.println("Correction x1 de y1 :\n");
-        // TGraph x1 = new TGraph(hbase, 3, 4);
-        // x1.decode(y1, 100).display();
+        System.out.println("Correction x1 de y1 :\n");
+        TGraph x1 = new TGraph(hbase, 3, 4);
+        x1.decode(y1, 100).display();
 
-        // System.out.println("x1 = x : " + x1.decode(y1, 100).isEqualTo(x));
+        System.out.println("x1 = x : " + x1.decode(y1, 100).isEqualTo(x));
          
-        // System.out.println("\n------------------------------------------------\n");
+        System.out.println("\n------------------------------------------------\n");
 
-        // //Vecteur d'erreur e2
-        // byte[][] e2 = {{0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-        // System.out.println("Vecteur d'erreurs e2 :\n");
-        // for(int i = 0; i < 20; i++) System.out.print(e2[0][i] + " ");
+        //Vecteur d'erreur e2
+        byte[][] e2 = {{0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+        System.out.println("Vecteur d'erreurs e2 :\n");
+        for(int i = 0; i < 20; i++) System.out.print(e2[0][i] + " ");
 
-        // System.out.println("\n\nMot de code bruité y2=x+e2 :\n");
-        // Matrix y2 = new Matrix(e2).add(x);
-        // y2.display();
+        System.out.println("\n\nMot de code bruité y2=x+e2 :\n");
+        Matrix y2 = new Matrix(e2).add(x);
+        y2.display();
 
-        // System.out.println("Syndrome de y2 :\n");
-        // hbase.multiply(y2.transpose()).transpose().display();
+        System.out.println("Syndrome de y2 :\n");
+        hbase.multiply(y2.transpose()).transpose().display();
         
-        // System.out.println("Correction x2 de y2 :\n");
-        // TGraph x2 = new TGraph(hbase, 3, 4);
-        // x2.decode(y2, 100).display();
+        System.out.println("Correction x2 de y2 :\n");
+        TGraph x2 = new TGraph(hbase, 3, 4);
+        x2.decode(y2, 100).display();
 
-        // System.out.println("x2 = x : " + x2.decode(y2, 100).isEqualTo(x));
+        System.out.println("x2 = x : " + x2.decode(y2, 100).isEqualTo(x));
          
-        // System.out.println("\n------------------------------------------------\n");
+        System.out.println("\n------------------------------------------------\n");
 
-        // //Vecteur d'erreur e3
-        // byte[][] e3 = {{0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0}};
-        // System.out.println("Vecteur d'erreurs e3 :\n");
-        // for(int i = 0; i < 20; i++) System.out.print(e3[0][i] + " ");
+        //Vecteur d'erreur e3
+        byte[][] e3 = {{0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0}};
+        System.out.println("Vecteur d'erreurs e3 :\n");
+        for(int i = 0; i < 20; i++) System.out.print(e3[0][i] + " ");
         
-        // System.out.println("\n\nMot de code bruité y3=x+e3 :\n");
-        // Matrix y3 = new Matrix(e3).add(x);
-        // y3.display();
+        System.out.println("\n\nMot de code bruité y3=x+e3 :\n");
+        Matrix y3 = new Matrix(e3).add(x);
+        y3.display();
 
-        // System.out.println("Syndrome de y3 :\n");
-        // hbase.multiply(y3.transpose()).transpose().display();
+        System.out.println("Syndrome de y3 :\n");
+        hbase.multiply(y3.transpose()).transpose().display();
 
-        // System.out.println("Correction x3 de y3 :\n");
-        // TGraph x3 = new TGraph(hbase, 3, 4);
-        // x3.decode(y3, 100).display();
+        System.out.println("Correction x3 de y3 :\n");
+        TGraph x3 = new TGraph(hbase, 3, 4);
+        x3.decode(y3, 100).display();
 
-        // System.out.println("x3 = x : " + x3.decode(y3, 100).isEqualTo(x));
+        System.out.println("x3 = x : " + x3.decode(y3, 100).isEqualTo(x));
 
-        // System.out.println("\n------------------------------------------------\n");
+        System.out.println("\n------------------------------------------------\n");
         
-        // //Vecteur d'erreur e4
-        // byte[][] e4 = {{0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0}};
-        // System.out.println("Vecteur d'erreurs e4 :\n");
-        // for(int i = 0; i < 20; i++) System.out.print(e4[0][i] + " ");
+        //Vecteur d'erreur e4
+        byte[][] e4 = {{0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0}};
+        System.out.println("Vecteur d'erreurs e4 :\n");
+        for(int i = 0; i < 20; i++) System.out.print(e4[0][i] + " ");
 
-        // System.out.println("\n\nMot de code bruité y4=x+e4 :\n");
-        // Matrix y4 = new Matrix(e4).add(x);
-        // y4.display();
+        System.out.println("\n\nMot de code bruité y4=x+e4 :\n");
+        Matrix y4 = new Matrix(e4).add(x);
+        y4.display();
 
-        // System.out.println("Syndrome de y4 :\n");
-        // hbase.multiply(y4.transpose()).transpose().display();
+        System.out.println("Syndrome de y4 :\n");
+        hbase.multiply(y4.transpose()).transpose().display();
 
-        // System.out.println("Correction x4 de y4 :\n");
-        // TGraph x4 = new TGraph(hbase, 3, 4);
-        // x4.decode(y4, 100).display();
+        System.out.println("Correction x4 de y4 :\n");
+        TGraph x4 = new TGraph(hbase, 3, 4);
+        x4.decode(y4, 100).display();
 
-        // System.out.println("x4 = x : " + x4.decode(y4, 100).isEqualTo(x));
+        System.out.println("x4 = x : " + x4.decode(y4, 100).isEqualTo(x));
 
 
         // TACHE 3
+        System.out.println("\n-------------------------------------\n\t\tTâche 3\t\n-------------------------------------\n");
         Matrix hbase2 = loadMatrix("data/Matrix-2048-6144-5-15", 2048, 6144);
         Matrix hbase2genG = hbase2.genG();
         // hbase2genG.display();
@@ -173,7 +176,7 @@ public class Main {
         }
 
         //Encodage de u
-        Matrix x = new Matrix(mot_u).multiply(hbase2genG);
+        Matrix xt3 = new Matrix(mot_u).multiply(hbase2genG);
         // x.display();
         //Génération du graphe de Tanner de H
         TGraph graph2 = new TGraph(hbase2, 5, 15);
@@ -192,9 +195,9 @@ public class Main {
             int countOK = 0, countEchec = 0, countError = 0;
             for(int i = 0; i < 10000; i++)
             {
-                Matrix e = x.errGen(w);
-                Matrix y = x.add(e);
-                if(graph2.decode(y, 200).isEqualTo(x))
+                Matrix e = xt3.errGen(w);
+                Matrix y = xt3.add(e);
+                if(graph2.decode(y, 200).isEqualTo(xt3))
                     countOK++;
                 else if(graph2.decode(y, 200).isEqualTo(error))
                     countEchec++;
