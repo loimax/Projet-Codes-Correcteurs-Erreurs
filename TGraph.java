@@ -91,7 +91,7 @@ public class TGraph {
 
     public void display()
     {
-        System.out.println("\nGraphe de Tanner :\n\nRight tab display :\t\tLeft tab Display :\n");
+        System.out.println("Graphe de Tanner :\n\nRight tab display :\t\tLeft tab Display :\n");
         int i, j, k, l;
         for(i = 0 , k = 0; i < n_c; i++, k++)
         {
@@ -125,43 +125,48 @@ public class TGraph {
     public Matrix decode(Matrix code, int rounds)
     {
         Matrix result = new Matrix(code.getRows(), code.getCols());
-        boolean flag_error;
-        int[] count=new int[this.n_c];
-
+        boolean flag;
+        int[]count = new int[this.n_c];
+    
         for(int i = 0; i < this.n_c; i++)
         {
             this.right[i][0] = code.getElem(0, i);
         }
 
-        for(int lim=0; lim<rounds; lim++)
+        // Boucle principale
+        for(int lim = 0; lim < rounds; lim++)
         {
-            flag_error = false;
-            for(int i=0; i<this.n_r; i++)
+            flag = false;
+            for(int i = 0; i < this.n_r; i++)
             {
-                //Initialisation noeud F
+                //Initialisation du noeud F
                 this.left[i][0] = 0;
-                //Calcul de la parité
-                for(int par=1; par<this.w_r+1; par++)
+
+                //Calcul des parités
+                for(int par = 1; par < this.w_r + 1; par++)
+                {
                     this.left[i][0] += this.right[this.left[i][par]][0];
                     this.left[i][0] %= 2;
-                
-                //Verifier s'il y a une erreur
-                if(this.left[i][0] != 0) flag_error = true;
+                }
+                //Vérifier s'il y a une erreur
+                if(this.left[i][0] != 0) 
+                    flag = true;
             }
             //décodage si pas d'erreur
-            if(!flag_error)
+            if(!flag)
             {
-                for(int i=0; i < this.n_c; i ++)
+                for(int i = 0; i < this.n_c; i++)
                     result.setElem(0, i, (byte)this.right[i][0]);
                 return result;
             }
-            //Traitement des erreurs
-            //On re initialise count
-            for(int i=0; i<this.n_c; i++) 
+
+            //On reinitialise count
+
+            for(int i = 0; i < this.n_c; i++) 
                 count[i]=0;
-            //Comptage du maximum des erreurs
+            //Compte du maximum des erreurs
             int max_error = 0;
-            for(int i=0; i<n_r ; i++)
+            for(int i = 0; i < n_r ; i++)
             {
                 if(this.left[i][0] != 0)
                 {
@@ -179,8 +184,8 @@ public class TGraph {
                     this.right[i][0] = 1-this.right[i][0];
             }
         }
-        //On dépasse la limite d'itération on retourne un mot qui vaut -1
-        for(int i=0; i<this.n_c; i++) 
+        //Si on dépasse la limite d'itération on retourne un mot qui vaut -1
+        for(int i = 0; i < this.n_c; i++) 
             result.setElem(0, i, (byte) -1);
         return result;
     }

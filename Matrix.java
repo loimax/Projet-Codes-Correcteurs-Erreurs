@@ -1,3 +1,4 @@
+import java.util.Random;
 public class Matrix {
     byte[][] data = null;
     private int rows = 0, cols = 0;
@@ -137,7 +138,8 @@ public class Matrix {
             data[i][b] = (byte) ((data[i][b] + data[i][a]) % 2);
         }
     }
-    public Matrix sysTransform() {
+    public Matrix sysTransform() 
+    {
         Matrix r = new Matrix(data);
         // System.out.println("Initialisation :\n");
         // r.display();
@@ -187,10 +189,11 @@ public class Matrix {
                 }
             }
         }
-        r.display();
+        // r.display();
         return r;
     }   
-    public Matrix genG(){
+    public Matrix genG()
+    {
         Matrix a = new Matrix(data).sysTransform();
         Matrix b = new Matrix(a.data).transpose();
         //G = (Ik|P) où Ik est la matrice identité à k lignes et k colonnes et 
@@ -207,8 +210,41 @@ public class Matrix {
                 g.data[i][j_g] = b.data[i][j];
             }
         }
-        g.display();
+        // g.display();
         return g;
+    }
+
+    public Matrix errGen(int w)
+    {
+        byte[][] code = null;
+        code = new byte[1][this.getCols()];
+        int min_val = 0;
+        int max_val = 6144;
+        int i = 0;
+
+        //Initialisation à zéro
+        for(i = 0; i < this.getCols(); i++)
+        {
+            code[0][i] = (byte)0;
+        }
+        //Changement des coefficients
+        for(i = 0; i < w; i++)
+        {   
+            Random ran = new Random();
+            int x = ran.nextInt(max_val) + min_val;
+
+            if(code[0][x] == 0)
+            {
+                code[0][x] = 1;
+            }
+            else
+            {
+                w++;
+            }
+            // System.out.println(code[0][x] + " valeur de w " + w);
+        }
+        Matrix result = new Matrix(code);
+        return result;
     }
 }
 
