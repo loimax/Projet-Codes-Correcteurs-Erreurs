@@ -152,7 +152,7 @@ public class TGraph {
                 if(this.left[i][0] != 0) 
                     flag = true;
             }
-            //décodage si pas d'erreur
+            //Vérification
             if(!flag)
             {
                 for(int i = 0; i < this.n_c; i++)
@@ -164,7 +164,7 @@ public class TGraph {
 
             for(int i = 0; i < this.n_c; i++) 
                 count[i]=0;
-            //Compte du maximum des erreurs
+            //Calcul du max
             int max_error = 0;
             for(int i = 0; i < n_r ; i++)
             {
@@ -177,7 +177,7 @@ public class TGraph {
                     }
                 }
             }
-            //On change les max des erreurs
+            //Renversement de bits
             for(int i=0; i<this.n_c; i++)
             {
                 if(count[i] == max_error)
