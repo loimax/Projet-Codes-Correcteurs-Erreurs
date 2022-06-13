@@ -141,8 +141,6 @@ public class Matrix {
     public Matrix sysTransform() 
     {
         Matrix r = new Matrix(data);
-        // System.out.println("Initialisation :\n");
-        // r.display();
     	for (int i = 0, col = cols - rows; i < rows && col < cols; i++, col++) 
         { 
             if (r.data[i][col] == 0)

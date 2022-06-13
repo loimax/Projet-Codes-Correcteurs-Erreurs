@@ -20,17 +20,23 @@ public class Main {
     
     public static void main(String[] arg){
         
-        // byte[][] tab = {{1,0,1,0},{0,1,0,1}};
-        // Matrix m = new Matrix(tab);  
-        // m.display();
-        // // m.addRow(0, 2);
-        // // m.addCol(1, 0); 
-        // // m.sysTransform(); 
-        // m.genG();
+        
         
         // Tâche 1 :
         System.out.println("\n-------------------------------------\n\t\tTâche 1\t\n-------------------------------------\n");
         Matrix hbase = loadMatrix("data/matrix-15-20-3-4", 15, 20);
+
+        System.out.println("Création d'une matrice à partir du tableau tab = {{1,0,1,0},{0,1,0,1}} :\n");
+        byte[][] tab1 = {{1,0,1,0},{0,1,0,1}};
+        Matrix m1 = new Matrix(tab1);  
+        m1.display();
+
+        System.out.println("Ajout de deux lignes : ligne 1 et ligne 2 à l'aide de la méthode addRow() :\n");
+        m1.addRow(0, 1);
+        m1.display();
+
+        System.out.println("Multiplication de deux matrices : m1 et la transposée de m1 à l'aide de la méthode multiply() :\n");
+        m1.multiply(m1.transpose()).display();
 
         System.out.println("Matrice de controle H :\n");
         hbase.display();
